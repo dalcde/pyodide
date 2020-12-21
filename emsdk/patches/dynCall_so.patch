@@ -1,5 +1,17 @@
 --- a/emsdk/fastcomp/emscripten/src/support.js
 +++ b/emsdk/fastcomp/emscripten/src/support.js
+@@ -338,6 +338,11 @@ function relocateExports(exports, memoryBase, tableBase, moduleLocal) {
+       }
+ #endif
+     }
++    if (e.startsWith("dynCall_")) {
++      if (!Module.hasOwnProperty(e)) {
++        Module[e] = value;
++      }
++    }
+     relocated[e] = value;
+     if (moduleLocal) {
+ #if WASM_BACKEND
 @@ -510,7 +515,18 @@ function loadWebAssemblyModule(binary, flags) {
            // present in the dynamic library but not in the main JS,
            // and the dynamic library cannot provide JS for it. Use
@@ -20,15 +32,3 @@
          }
          // otherwise this is regular function import - call it indirectly
          return obj[prop] = function() {
-@@ -338,6 +338,11 @@ function relocateExports(exports, memoryBase, tableBase, moduleLocal) {
-       }
- #endif
-     }
-+    if (e.startsWith("dynCall_")) {
-+      if (!Module.hasOwnProperty(e)) {
-+        Module[e] = value;
-+      }
-+    }
-     relocated[e] = value;
-     if (moduleLocal) {
- #if WASM_BACKEND
