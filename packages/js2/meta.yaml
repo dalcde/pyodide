@@ -1,0 +1,7 @@
+package:
+  name: js2
+  version: "0.1"
+source:
+  path: js2
+build:
+  cflags: -I../../../../src/type_conversion/
