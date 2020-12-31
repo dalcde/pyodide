@@ -22,7 +22,7 @@ index ba37cf99e2..c99e28a272 100755
  	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
  	| alphapca5[67]-* | alpha64pca5[67]-* | arc-* | arceb-* \
  	| arm-*  | armbe-* | armle-* | armeb-* | armv*-* \
-+	| asmjs \
++	| wasm32 \
  	| avr-* | avr32-* \
  	| ba-* \
  	| be32-* | be64-* \
@@ -43,7 +43,7 @@ index a979363acf..c4e0b866c3 100755
  	*-*-vxworks*)
  	    ac_sys_system=VxWorks
  	    ;;
-+	asmjs-*-*)
++	wasm32-*-*)
 +		ac_sys_system=Emscripten
 +		;;
  	*)
@@ -53,7 +53,7 @@ index a979363acf..c4e0b866c3 100755
  	*-*-vxworks*)
  		_host_cpu=$host_cpu
  		;;
-+	asmjs-*-*)
++	wasm32-*-*)
 +		_host_cpu=
 +		;;
  	*)
@@ -67,7 +67,7 @@ index e57ef7c38b..c1977f3a6f 100644
  	*-*-vxworks*)
  	    ac_sys_system=VxWorks
  	    ;;
-+	asmjs-*-*)
++	wasm32-*-*)
 +		ac_sys_system=Emscripten
 +		;;
  	*)
@@ -77,7 +77,7 @@ index e57ef7c38b..c1977f3a6f 100644
  		;;
  	*-*-vxworks*)
  		_host_cpu=$host_cpu
-+	asmjs-*-*)
++	wasm32-*-*)
 +		_host_cpu=
  		;;
  	*)

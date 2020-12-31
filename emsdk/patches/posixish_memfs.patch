@@ -1,8 +1,8 @@
 Modify MEMFS to update timestamp of parent directory on file creation and removal.
 More POSIXish compliant for a one timestamp fs, behaves like a modification date.
 
---- a/emsdk/fastcomp/emscripten/src/library_memfs.js    2019-08-19 18:11:40.000000000 +0200
-+++ b/emsdk/fastcomp/emscripten/src/library_memfs.js	2020-12-23 12:22:38.000000000 +0100
+--- a/emsdk/upstream/emscripten/src/library_memfs.js    2019-08-19 18:11:40.000000000 +0200
++++ b/emsdk/upstream/emscripten/src/library_memfs.js	2020-12-23 12:22:38.000000000 +0100
 @@ -88,6 +88,7 @@
        // add the new node to the parent
        if (parent) {

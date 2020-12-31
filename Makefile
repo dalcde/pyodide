@@ -25,6 +25,7 @@ LDFLAGS=\
 	-s ALLOW_MEMORY_GROWTH=1 \
 	-s MAIN_MODULE=1 \
 	-s EMULATE_FUNCTION_POINTER_CASTS=1 \
+	-s BINARYEN_EXTRA_PASSES="--pass-arg=max-func-params@61" \
 	-s LINKABLE=1 \
 	-s EXPORT_ALL=1 \
 	-s EXPORTED_FUNCTIONS='["___cxa_guard_acquire", "__ZNSt3__28ios_base4initEPv", "_main"]' \
@@ -36,7 +37,6 @@ LDFLAGS=\
 	$(wildcard $(CPYTHONROOT)/build/bzip2*/libbz2.a) \
 	-lstdc++ \
 	--memory-init-file 0 \
-	-s "BINARYEN_TRAP_MODE='clamp'" \
 	-s LZ4=1
 
 SITEPACKAGES=root/lib/python$(PYMINOR)/site-packages
@@ -178,7 +178,7 @@ $(PYODIDE_EMCC):
 		if hash ccache &>/dev/null; then \
 			ln -s `which ccache` $@ ; \
 		else \
-			ln -s emsdk/emsdk/fastcomp/emscripten/emcc $@; \
+			ln -s emsdk/emsdk/upstream/emscripten/emcc $@; \
 		fi; \
 	fi
 
@@ -189,7 +189,7 @@ $(PYODIDE_CXX):
 		if hash ccache &>/dev/null; then \
 			ln -s `which ccache` $@ ; \
 		else \
-			ln -s emsdk/emsdk/fastcomp/emscripten/em++ $@; \
+			ln -s emsdk/emsdk/upstream/emscripten/em++ $@; \
 		fi; \
 	fi
 

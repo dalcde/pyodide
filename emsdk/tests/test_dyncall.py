@@ -50,6 +50,8 @@ void foo() {
                 "-s",
                 "EMULATE_FUNCTION_POINTER_CASTS=1",
                 "-s",
+                "BINARYEN_EXTRA_PASSES='--pass-arg=max-func-params@61'",
+                "-s",
                 "EXPORT_ALL=1",
             ],
             check=True,
@@ -64,8 +66,10 @@ void foo() {
                 "library.wasm",
                 "-s",
                 "EMULATE_FUNCTION_POINTER_CASTS=1",
+                "-s",
+                "BINARYEN_EXTRA_PASSES='--pass-arg=max-func-params@61'",
             ],
             check=True,
         )
         out = subprocess.run(["node", "a.out.js"], capture_output=True, check=True)
-        assert out.stdout == b"hello from main\n0\n4\n"
+        assert out.stdout == b"hello from main\n0\n1\n"

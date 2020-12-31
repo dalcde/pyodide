@@ -27,6 +27,8 @@ void foo() {
                 "-s",
                 "EMULATE_FUNCTION_POINTER_CASTS=1",
                 "-s",
+                "BINARYEN_EXTRA_PASSES='--pass-arg=max-func-params@61'",
+                "-s",
                 "EXPORT_ALL=1",
             ],
             check=True,
@@ -41,6 +43,8 @@ void foo() {
                 "library.wasm",
                 "-s",
                 "EMULATE_FUNCTION_POINTER_CASTS=1",
+                "-s",
+                "BINARYEN_EXTRA_PASSES='--pass-arg=max-func-params@61'",
             ],
             check=True,
         )
