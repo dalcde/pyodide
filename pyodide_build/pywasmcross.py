@@ -283,8 +283,14 @@ def handle_command(line, args, dryrun=False):
         # definitely isn't
         arg = re.sub(r"/python([0-9]\.[0-9]+)m", r"/python\1", arg)
         if arg.endswith(".so"):
-            arg = arg[:-3] + ".wasm"
             output = arg
+
+        # error: linking a library with `-shared` will emit a static object
+        # file.  This is a form of emulation to support existing build systems.
+        # If you want to build a runtime shared library use the SIDE_MODULE
+        # setting. [-Wemcc] [-Werror]
+        if arg == "-shared":
+            continue
 
         # Fix for scipy to link to the correct BLAS/LAPACK files
         if arg.startswith("-L") and "CLAPACK" in arg:
@@ -350,7 +356,7 @@ def handle_command(line, args, dryrun=False):
 
     # Emscripten .so files shouldn't have the native platform slug
     if library_output:
-        renamed = output[:-5] + ".so"
+        renamed = output
         for ext in importlib.machinery.EXTENSION_SUFFIXES:
             if ext == ".so":
                 continue

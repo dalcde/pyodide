@@ -37,7 +37,7 @@ def test_handle_command():
     assert handle_command_wrap("gcc test.c", args) == "emcc test.c"
     assert (
         handle_command_wrap("gcc -shared -c test.o -o test.so", args)
-        == "emcc -shared -c test.o -o test.wasm"
+        == "emcc -c test.o -o test.so"
     )
 
     # check cxxflags injection and cpp detection
@@ -57,14 +57,14 @@ def test_handle_command():
     args = Args(cflags="", cxxflags="", ldflags="-lm", host="", replace_libs="")
     assert (
         handle_command_wrap("gcc -shared -c test.o -o test.so", args)
-        == "emcc -lm -shared -c test.o -o test.wasm"
+        == "emcc -lm -c test.o -o test.so"
     )
 
     # check library replacement
     args = Args(cflags="", cxxflags="", ldflags="", host="", replace_libs="bob=fred")
     assert (
         handle_command_wrap("gcc -shared -c test.o -lbob -o test.so", args)
-        == "emcc -shared -c test.o -lfred -o test.wasm"
+        == "emcc -c test.o -lfred -o test.so"
     )
 
     # compilation checks in numpy
@@ -86,4 +86,4 @@ def test_conda_compiler_compat():
     args = Args(cflags="", cxxflags="", ldflags="", host="", replace_libs="")
     assert handle_command_wrap(
         "gcc -shared -c test.o -B /compiler_compat -o test.so", args
-    ) == ("emcc -shared -c test.o -o test.wasm")
+    ) == ("emcc -c test.o -o test.so")
