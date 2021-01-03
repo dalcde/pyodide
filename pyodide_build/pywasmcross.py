@@ -335,10 +335,6 @@ def handle_command(line, args, dryrun=False):
             del new_args[-1]
             continue
 
-        # See https://github.com/emscripten-core/emscripten/issues/8650
-        if arg in ["-lfreetype", "-lz", "-lpng", "-lgfortran"]:
-            continue
-
         new_args.append(arg)
 
     # This can only be used for incremental rebuilds -- it generates
